@@ -2,7 +2,7 @@
 <body>
 
 <?php
-/* Validations
+/* Validations Filters
  * Functions (filter_input - filter_var)
  * filter_input(INPUT_METHOD, $name, FILTER_VALIDATE_TYPE)
  * FILTER_VALIDATE_INT
@@ -11,15 +11,7 @@
  * FILTER_VALIDATE_IP
  * FILTER_VALIDATE_URL
  */
-?>
-
-<?php
-// Verify if the button has clicked
-$sendFormExists = isset($_POST['send-form']);
-if ($sendFormExists) {
-  // Error array
-  $errors = [];
-
+/*
   // Validations
   if(!$yearsOld = filter_input(INPUT_POST, 'yearsOld', FILTER_VALIDATE_INT)) {
     $errors[] = "Age needs to be a int";
@@ -36,6 +28,38 @@ if ($sendFormExists) {
   if(!$url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)) {
     $errors[] = "Invalid URL";
   }
+ * */
+
+
+/* Sanitize Filters
+ * Functions (filter_input - filter_var)
+ * filter_input(INPUT_METHOD, $name, FILTER_VALIDATE_TYPE)
+ * FILTER_SANITIZE_SPECIAL_CHARS
+ * FILTER_SANITIZE_INT
+ * FILTER_SANITIZE_EMAIL
+ * FILTER_SANITIZE_URL
+ */
+?>
+
+<?php
+// Verify if the button has clicked
+$sendFormExists = isset($_POST['send-form']);
+if ($sendFormExists) {
+  // Error array
+  $errors = [];
+
+  // Sanitize
+  $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+  echo $name."<br>";
+
+  $age = filter_input(INPUT_POST, 'age', FILTER_SANITIZE_NUMBER_INT);
+  echo $age."<br>";
+
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  echo $email."<br>";
+
+  $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL);
+  echo $url."<br>";
 
   // Showing messages
   if(!empty($errors)) {
@@ -49,10 +73,9 @@ if ($sendFormExists) {
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
-Age: <input type="text" name="yearsOld"><br>
+Name: <input type="text" name="name"><br>
+Age: <input type="text" name="age"><br>
 Email: <input type="email" name="email"><br>
-Weight: <input type="text" name="weight"><br>
-IP: <input type="text" name="ip"><br>
 URL: <input type="text" name="url"><br>
 <button type="submit" name="send-form"> Send </button>
 </form>
