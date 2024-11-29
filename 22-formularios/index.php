@@ -17,11 +17,27 @@
 // Verify if the button has clicked
 $sendFormExists = isset($_POST['send-form']);
 if ($sendFormExists) {
+  // Error array
   $errors = [];
-  $yearsOld = $_POST['yearsOld'];
+
+  // Validations
   if(!$yearsOld = filter_input(INPUT_POST, 'yearsOld', FILTER_VALIDATE_INT)) {
     $errors[] = "Age needs to be a int";
   }
+  if(!$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email";
+  }
+  if(!$weight = filter_input(INPUT_POST, 'weight', FILTER_VALIDATE_FLOAT)) {
+    $errors[] = "Weight needs to be an float";
+  }
+  if(!$ip = filter_input(INPUT_POST, 'ip', FILTER_VALIDATE_IP)) {
+    $errors[] = "Invalid IP";
+  }
+  if(!$url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)) {
+    $errors[] = "Invalid URL";
+  }
+
+  // Showing messages
   if(!empty($errors)) {
     foreach ($errors as $error){
       echo "<li>$error</li>";
@@ -35,7 +51,7 @@ if ($sendFormExists) {
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
 Age: <input type="text" name="yearsOld"><br>
 Email: <input type="email" name="email"><br>
-Weigth: <input type="text" name="Weigth"><br>
+Weight: <input type="text" name="weight"><br>
 IP: <input type="text" name="ip"><br>
 URL: <input type="text" name="url"><br>
 <button type="submit" name="send-form"> Send </button>
