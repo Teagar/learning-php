@@ -4,30 +4,32 @@
   // Verification
   if (isset($_POST['sendform'])) {
     $allowFormats = ["png", "jpeg", "jpg", "gif"];
-    $extension = pathinfo($_FILES['archive']['name'], PATHINFO_EXTENSION);
+    $filesCount = count($_FILES['archive']['name']);
 
     // Verification of extension
-    if (in_array($extension, $allowFormats)) {
-      $folder = "arquivos/";
-      $temp = $_FILES['archive']['tmp_name'];
-      $newName = uniqid().".$extension";
+    for ($i = 0; $i < $filesCount; $i++) {
+      $extension = pathinfo($_FILES['archive']['name'][$i], PATHINFO_EXTENSION);
+      if (in_array($extension, $allowFormats)) {
+	$folder = "arquivos/";
+	$temp = $_FILES['archive']['tmp_name'][$i];
+	$newName = uniqid().".$extension";
 
-      if(move_uploaded_file($temp, $folder.$newName)) {
-	$message = "Uploaded";
+	if(move_uploaded_file($temp, $folder.$newName)) {
+	  echo "The file is uploaded:$folder$newName<br>";
+	} else {
+	  echo "Cant make upload to $temp<br>";
+	}
       } else {
-	$message= "Cant make a upload";
+	echo "invalid Format: $extension<br>";
       }
-    } else {
-      $message = "invalid Format";
-    }
 
-    echo $message;
-  }
+      }
+    }
 ?>
   
   <!-- Form -->
   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
-    <input type="file" name="archive" required><br>
+    <input type="file" name="archive[]" required multiple><br>
     <input type="submit" name="sendform" value="Send">
   </form>
 </body>
