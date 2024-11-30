@@ -35,7 +35,7 @@
  * Functions (filter_input - filter_var)
  * filter_input(INPUT_METHOD, $name, FILTER_VALIDATE_TYPE)
  * FILTER_SANITIZE_SPECIAL_CHARS
- * FILTER_SANITIZE_INT
+ * FILTER_SANITIZE_NUMBER_INT
  * FILTER_SANITIZE_EMAIL
  * FILTER_SANITIZE_URL
  */
@@ -53,12 +53,21 @@ if ($sendFormExists) {
   echo $name."<br>";
 
   $age = filter_input(INPUT_POST, 'age', FILTER_SANITIZE_NUMBER_INT);
+  if(!filter_var($age, FILTER_VALIDATE_INT)) {
+    $errors[] = "Age need to be an int";
+  }
   echo $age."<br>";
 
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Ivalid email";
+  }
   echo $email."<br>";
 
   $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL);
+  if(!filter_var($url, FILTER_VALIDATE_URL)) {
+    $errors[] = "Ivalid URL";
+  }
   echo $url."<br>";
 
   // Showing messages
