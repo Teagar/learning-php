@@ -15,6 +15,8 @@ if (isset($_GET['send-form'])) {
   echo "</pre>";
 }
 
+echo $name;
+
 ?>
 
 <form action="<?php $_SERVER['PHP_SELF']; ?>"method="get"> 
@@ -23,6 +25,7 @@ if (isset($_GET['send-form'])) {
     <label for="email">EMAIL:</label>
     <input type="email" name="email" id="email"><br>
     <button type="submit" name="send-form">Send</button>
+    <a href="dados.php?name=Thiago"> SEND </a>
   </form>
 </body>
 </html>
