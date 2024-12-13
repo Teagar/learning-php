@@ -1,3 +1,6 @@
+<?php
+require_once "conn.php";
+?>
 <html>
 <head>
   <title>Login</title>

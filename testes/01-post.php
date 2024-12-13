@@ -4,11 +4,14 @@
 <body> 
 
 <?php
+// Define variables names
 $name = $_POST['name'];
 $email = $_POST['email'];
+$isFormSend = isset($_POST['send-form']);
 
-if (isset($_POST['send-form'])) {
-  echo $_POST['name']."<br>".$_POST['email'];
+// Verify if the form has send
+if ($isFormSend) {
+  echo $name."<br>".$email;
   echo "<hr>";
   echo "<pre>";
   var_dump($_POST);
@@ -17,6 +20,7 @@ if (isset($_POST['send-form'])) {
 
 ?>
 
+<!-- Simple login form --!>
 <form action="<?php $_SERVER['PHP_SELF']; ?>"method="post"> 
     <label for="name">NAME:</label>
     <input type="text" name="name" id="name"><br>
