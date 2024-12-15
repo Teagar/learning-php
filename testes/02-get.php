@@ -29,7 +29,7 @@ echo $name;
     <label for="email">EMAIL:</label>
     <input type="email" name="email" id="email"><br>
     <button type="submit" name="send-form">Send</button>
-    <a href="dados.php?name=Thiago"> SEND </a>
+    <a href="dados.php?name=Thiago"> PRE SEND </a>
   </form>
 </body>
 </html>
