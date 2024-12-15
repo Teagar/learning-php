@@ -21,7 +21,8 @@ if ($isFormSend) {
 ?>
 
 <!-- Simple login form --!>
-<form action="<?php $_SERVER['PHP_SELF']; ?>"method="post"> 
+<!-- form action="<?php $_SERVER['PHP_SELF']; ?>"method="post" --!> 
+<form action="dados.php"method="post"> 
     <label for="name">NAME:</label>
     <input type="text" name="name" id="name"><br>
     <label for="email">EMAIL:</label>
