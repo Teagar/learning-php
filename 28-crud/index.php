@@ -34,7 +34,7 @@ $result = mysqli_query($conn, $sql);
 	  <td><?=$data['forename']?></td>
 	  <td><?=$data['email']?></td>
 	  <td><?=$data['yearsOld']?></td>
-	  <td><a href="" class="btn-floating orange">Edit</a></td>
+	  <td><a href="edit.php?id=<?=$data['id']?>" class="btn-floating orange">Edit</a></td>
 	  <td><a href="" class="btn-floating red">Delete</a></td>
 	</tr>
 	<?php } ?>
