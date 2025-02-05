@@ -1,10 +1,15 @@
 <?php
 // Arrays numericos
 echo "<pre>";
-$cars = [1=>"BMW", 2=>"Veloster", 3=>"Hilux"];
+$cars = [
+  1=>"BMW", 
+  2=>"Veloster", 
+  3=>"Hilux"
+];
 $cars[] = "Amarok";
 $cars[8] = "Ford";
 $cars[0] = "Chevrolet";
+
 print_r($cars);
 echo $cars[1];
 

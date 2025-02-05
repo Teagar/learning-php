@@ -1,21 +1,27 @@
 <html>
 <body>
 <?php
-  // Verification
-  if (isset($_POST['sendform'])) {
+// Verification
+
+$isFormSend = isset($_POST['sendform']);
+
+  if ($isFormSend) {
     $allowFormats = ["png", "jpeg", "jpg", "gif"];
     $filesCount = count($_FILES['archive']['name']);
 
     // Verification of extension
-    for ($i = 0; $i < $filesCount; $i++) {
-      $extension = pathinfo($_FILES['archive']['name'][$i], PATHINFO_EXTENSION);
+    for ($file = 0; $file < $filesCount; $file++) {
+      $extension = pathinfo($_FILES['archive']['name'][$file], PATHINFO_EXTENSION);
       if (in_array($extension, $allowFormats)) {
 	$folder = "arquivos/";
-	$temp = $_FILES['archive']['tmp_name'][$i];
+	$temp = $_FILES['archive']['tmp_name'][$file];
 	$newName = uniqid().".$extension";
+	$newFile = $folder.$newName;
 
-	if(move_uploaded_file($temp, $folder.$newName)) {
-	  echo "The file is uploaded:$folder$newName<br>";
+	$archiveHasMoved = move_uploaded_file($temp, $newFile);
+
+	if($archiveHasMoved) {
+	  echo "The file is uploaded:$newFile<br>";
 	} else {
 	  echo "Cant make upload to $temp<br>";
 	}
