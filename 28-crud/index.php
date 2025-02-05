@@ -1,6 +1,11 @@
 <?php
+include_once 'php_action/conn.php';
+
 include_once './includes/header.php';
+
+include_once './includes/message.php';
 ?>
+
 
 <div class="row"> 
   <div class="col s12 m6 push-m3 red"> 
@@ -14,15 +19,25 @@ include_once './includes/header.php';
 	  <th>Years Old:</th>
 	</tr>
       </thead>
+
       <tbody> 
+	<?php
+	$sql = "SELECT * FROM clients";
+$result = mysqli_query($conn, $sql);
+
+	while($data = mysqli_fetch_array($result)) {
+
+
+	?>
 	<tr> 
-	  <td>Thiago</td>
-	  <td>Cerqueira</td>
-	  <td>thiago@gmail.com</td>
-	  <td>29</td>
+	  <td><?=$data['name']?></td>
+	  <td><?=$data['forename']?></td>
+	  <td><?=$data['email']?></td>
+	  <td><?=$data['yearsOld']?></td>
 	  <td><a href="" class="btn-floating orange">Edit</a></td>
 	  <td><a href="" class="btn-floating red">Delete</a></td>
 	</tr>
+	<?php } ?>
       </tbody>
     </table>
     </br>

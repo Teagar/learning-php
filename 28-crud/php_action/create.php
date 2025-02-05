@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once 'conn.php';
 
@@ -10,8 +11,10 @@ if (isset($_POST['btn-register'])) {
 
   $sql = "INSERT INTO clients (`name`, forename, email, yearsOld) VALUES ('$name', '$forename', '$email', '$yearsOld')";
   if(mysqli_query($conn, $sql)) {
+    $_SESSION['message'] = 'Registered with success!';
     header('Location: ../index.php?success');
   } else {
+    $_SESSION['message'] = 'Error in register!';
     header('Location: ../index.php?error');
   }
 }
