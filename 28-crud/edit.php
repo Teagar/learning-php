@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="row"> 
-  <div class="col s12 m6 push-m3 red"> 
+  <div class="col s12 m6 push-m3"> 
     <h3 class="light"> Edit Client </h3>
     <form action="php_action/update.php" method="POST"> 
     <input type="hidden" name="id" value="<?= $data['id']?>">
