@@ -19,10 +19,10 @@ $result = mysqli_query($conn, $query);
           <th>Forename</th>
           <th>Email</th>
           <th>Years Old</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody> 
+	<?php if (mysqli_num_rows($result) > 0): ?>
         <?php while ($client = mysqli_fetch_assoc($result)): ?>
           <tr> 
             <td><?= htmlspecialchars($client['name']) ?></td>
@@ -33,10 +33,25 @@ $result = mysqli_query($conn, $query);
 	      <a href="edit.php?id=<?= (int) $client['id'] ?>" class="btn-floating orange"><i class="material-icons">edit</i></a>
 	    </td>
 	    <td>
-              <a href="delete.php?id=<?= (int) $client['id'] ?>" class="btn-floating red" onclick="return confirm('Are you sure?');"><i class="material-icons">delete</i></a>
+	      <form action="php_action/delete.php" method="POST" style="display:inline;">
+		  <input type="hidden" name="id" value="<?= (int) $client['id'] ?>">
+		  <button type="submit" name="btn-delete" class="btn-floating red" onclick="return confirm('Are you sure?');">
+		      <i class="material-icons">delete</i>
+		  </button>
+	      </form>
             </td>
           </tr>
-        <?php endwhile; ?>
+	  <?php 
+	  endwhile;
+	  else: ?>
+	  <tr> 
+	    <td>-</td>
+	    <td>-</td>
+	    <td>-</td>
+	    <td>-</td>
+	  </tr>
+	
+	  <?php endif; ?>
       </tbody>
     </table>
     
