@@ -30,8 +30,10 @@ $result = mysqli_query($conn, $query);
             <td><?= htmlspecialchars($client['email']) ?></td>
             <td><?= (int) $client['yearsOld'] ?></td>
             <td>
-              <a href="edit.php?id=<?= (int) $client['id'] ?>" class="btn-floating orange">Edit</a>
-              <a href="delete.php?id=<?= (int) $client['id'] ?>" class="btn-floating red" onclick="return confirm('Are you sure?');">Delete</a>
+	      <a href="edit.php?id=<?= (int) $client['id'] ?>" class="btn-floating orange"><i class="material-icons">edit</i></a>
+	    </td>
+	    <td>
+              <a href="delete.php?id=<?= (int) $client['id'] ?>" class="btn-floating red" onclick="return confirm('Are you sure?');"><i class="material-icons">delete</i></a>
             </td>
           </tr>
         <?php endwhile; ?>
