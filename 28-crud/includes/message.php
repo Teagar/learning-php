@@ -1,14 +1,14 @@
 <?php
 session_start();
-if(isset($_SESSION['message'])) { ?>
-<script>
-  window.onload = function() {
-    alert(<?= $_SESSION['message'];?>)
-  }
-</script>
 
-<?php
-}
-
-session_unset();
+if (!empty($_SESSION['message'])): ?>
+    <script>
+        window.onload = function() {
+	  // addslashes automaticaly
+            alert("<?= addslashes($_SESSION['message']); ?>");
+        };
+    </script>
+<?php 
+    unset($_SESSION['message']); // Remove just the message session
+endif; 
 ?>
