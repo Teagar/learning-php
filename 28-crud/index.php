@@ -1,50 +1,46 @@
 <?php
-include_once 'php_action/conn.php';
+require_once 'php_action/conn.php';
+require_once './includes/header.php';
+require_once './includes/message.php';
 
-include_once './includes/header.php';
-
-include_once './includes/message.php';
+// Query for search clients
+$query = "SELECT * FROM clients";
+$result = mysqli_query($conn, $query);
 ?>
-
 
 <div class="row"> 
   <div class="col s12 m6 push-m3 red"> 
-    <h3 class="light"> Clients </h3>
+    <h3 class="light">Clients</h3>
+    
     <table class="striped"> 
       <thead> 
-	<tr> 
-	  <th>Name:</th>
-	  <th>Forename:</th>
-	  <th>Email:</th>
-	  <th>Years Old:</th>
-	</tr>
+        <tr> 
+          <th>Name</th>
+          <th>Forename</th>
+          <th>Email</th>
+          <th>Years Old</th>
+          <th>Actions</th>
+        </tr>
       </thead>
-
       <tbody> 
-	<?php
-	$sql = "SELECT * FROM clients";
-$result = mysqli_query($conn, $sql);
-
-	while($data = mysqli_fetch_array($result)) {
-
-
-	?>
-	<tr> 
-	  <td><?=$data['name']?></td>
-	  <td><?=$data['forename']?></td>
-	  <td><?=$data['email']?></td>
-	  <td><?=$data['yearsOld']?></td>
-	  <td><a href="edit.php?id=<?=$data['id']?>" class="btn-floating orange">Edit</a></td>
-	  <td><a href="" class="btn-floating red">Delete</a></td>
-	</tr>
-	<?php } ?>
+        <?php while ($client = mysqli_fetch_assoc($result)): ?>
+          <tr> 
+            <td><?= htmlspecialchars($client['name']) ?></td>
+            <td><?= htmlspecialchars($client['forename']) ?></td>
+            <td><?= htmlspecialchars($client['email']) ?></td>
+            <td><?= (int) $client['yearsOld'] ?></td>
+            <td>
+              <a href="edit.php?id=<?= (int) $client['id'] ?>" class="btn-floating orange">Edit</a>
+              <a href="delete.php?id=<?= (int) $client['id'] ?>" class="btn-floating red" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+          </tr>
+        <?php endwhile; ?>
       </tbody>
     </table>
-    </br>
-    <a href="add.php" class="btn">Add client</a>
+    
+    <br>
+    <a href="add.php" class="btn">Add Client</a>
   </div>
 </div>
 
-<?php
-include_once './includes/footer.php';
-?>
+<?php require_once './includes/footer.php'; ?>
